@@ -1,0 +1,5 @@
+# Dadabase connection settings:
+jdbc.driverClassName=org.postgresql.Driver
+jdbc.url=jdbc:postgresql://localhost:5432/market
+jdbc.username=postgres
+jdbc.password=postgres
