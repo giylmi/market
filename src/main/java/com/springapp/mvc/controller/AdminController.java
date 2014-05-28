@@ -49,7 +49,7 @@ public class AdminController {
     public String add(@ModelAttribute Product newprod, Model model){
         dao.save(newprod);
         model.addAttribute("products", dao.findAll());
-        model.addAttribute("product", new Product());
+        model.addAttribute("newprod", new Product());
         return "admin";
     }
 
