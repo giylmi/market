@@ -1,9 +1,12 @@
 package com.springapp.mvc.aspect;
 
 import com.springapp.mvc.Admin;
+import com.springapp.mvc.model.Bucket;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +65,21 @@ public class SecurityAspect {
             }
         log.info("redirected to admin panel");
         return PANEL_REDIRECT;
+    }
+
+    @Before(value = "@annotation(org.springframework.web.bind.annotation.RequestMapping)")
+    public void desecure(JoinPoint point){
+        Object[] objects = point.getArgs();
+        for (Object t: objects)
+            if (t instanceof Model){
+                Model model = (Model) t;
+                model.addAttribute("secure", false);
+            }
+    }
+
+    @Before(value = "@annotation(org.springframework.web.bind.annotation.RequestMapping)")
+    public void bucket(JoinPoint point){
+        Bucket bucket = (Bucket) session.getAttribute("bucket");
+        if (bucket == null) session.setAttribute("bucket", new Bucket());
     }
 }

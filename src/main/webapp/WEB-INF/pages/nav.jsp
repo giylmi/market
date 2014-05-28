@@ -18,20 +18,24 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="#">Market</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="${param.active=="main"?"active":""}"><a href="/admin">Main</a></li>
-                <li class="${param.active=="product"?"active":""}"><a href="/admin">Product</a></li>
-
+                <li class="${param.active=="main"?"active":""}"><a href="/${(secured != null && secured)?"admin":""}">Main</a></li>
+                <li class="${param.active=="product"?"active":""}"><a href="/${(secured != null && secured)?"admin":""}">Product</a></li>
             </ul>
 
-            <c:if test="${secured}"><ul class="nav navbar-nav navbar-right">
+            <c:if test="${secured != null && secured}"><ul class="nav navbar-nav navbar-right">
                 <li><a href="/admin/logout">Logout</a></li>
             </ul></c:if>
+            <c:if test="${secured == null || !secured}">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="${param.active=="bucket"?"active":""}"><a href="/bucket">Bucket</a></li>
+                </ul>
+            </c:if>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

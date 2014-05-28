@@ -21,7 +21,7 @@
 
 <div class="container">
 
-    <form class="form-signin" role="form" method="post">
+    <form class="form-signin" role="form" method="post" action="/admin/login">
         <h2 class="form-signin-heading">Please sign in</h2>
         <input name="login" type="text" class="form-control" placeholder="Login" required autofocus>
         <input name="password" type="password" class="form-control" placeholder="Password" required>
