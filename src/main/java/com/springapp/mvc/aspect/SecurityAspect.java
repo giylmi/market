@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,6 +34,12 @@ public class SecurityAspect {
         if (admin != null) {
             try {
                 System.out.println("joinpoint \"" + point.getSignature().getName() + "\" proceeded");
+                Object[] objects = point.getArgs();
+                for (Object obj: objects)
+                    if (obj instanceof Model){
+                        Model model = (Model) obj;
+                        model.addAttribute("secured", true);
+                    }
                 return point.proceed();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();

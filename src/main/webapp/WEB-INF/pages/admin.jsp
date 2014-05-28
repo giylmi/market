@@ -21,7 +21,11 @@
 </head>
 <body>
     <div class="container">
-            <div class="row">
+        <jsp:include page="nav.jsp">
+            <jsp:param name="active" value="main"/>
+        </jsp:include>
+
+        <div class="row">
                 <form:form cssClass="col-md-3 thumbnail" method="post" commandName="newprod" action="/admin/add">
                     <form:input class="form-control" path="name" type="text" placeholder="Name" />
                     <form:input class="form-control" path="photo" type="url" placeholder="Image URL" />
@@ -38,6 +42,7 @@
                         <img class="img-responsive" src="${product.photo}">
                         <a href="/admin/product/${product.id}"><h4>${product.name}</h4></a>
                         <span><b>Price: </b>${product.price} <b>Left: </b> ${product.amount}</span>
+                        <a href="/admin/delete/${product.id}"><button type="button" class="btn btn-danger btn-block">Delete</button></a>
                     </div>
                 <c:if test="${status.count % 4 == 2}">
                     </div>
